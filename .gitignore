@@ -60,3 +60,4 @@ Win32
 !bin/resources
 /bin/resources/settings.model
 build-dbg/
+.claude/worktrees/
