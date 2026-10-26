@@ -708,7 +708,7 @@
     barbarian_invasion_12#enemy_attack : {
       date : "110.08.01"
       type : "enemy_attack"
-      target : "random
+      target : "random"
       items : {
         troop_soldiers : {
           type : "etruscanSoldier"

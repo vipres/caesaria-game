@@ -637,7 +637,7 @@
       fort_javelin : true
       fort_horse : true
       military_academy : true
-      lumber_mill = true
+      lumber_mill : true
       barracks : true
       fruit_farm : true
       olive_farm : true

@@ -87,7 +87,7 @@ game.ui.dialogs.gift2emperor.show = function()
       }
 
       g_session.player.removeMoney(this.cost)
-      g_session.emperor.sengGift(g_city.name(), "gift", this.cost,g_session.date)
+      g_session.emperor.sendGift(g_city.name(), "gift", this.cost,g_session.date)
       w.deleteLater()
     }
   }
