@@ -364,6 +364,10 @@ void engine_js_push(js_State* J,const Variant& param)
     js_pushstring(J, param.toString().c_str());
   break;
 
+  case Variant::Invalid:
+    js_pushundefined(J);
+  break;
+
   default:
     js_pushnull(J);
     Logger::warning( "!!! Undefined value for js.pcall engine_js_push when find " + param.typeName() );
@@ -541,6 +545,11 @@ void engine_js_LoadArchive(js_State* J)
 
   Directory dir = archivePath.directory();
   Path arcPath = dir.find(archivePath.baseName(), ignoreCase ? Path::ignoreCase : Path::nativeCase);
+
+  if (arcPath.toString().empty()) {
+    Logger::info("JS:LoadArchive: file not found, skip " + archivePath.toString());
+    return;
+  }
 
   ArchivePtr archive = FileSystem::instance().mountArchive(arcPath);
   if (archive.isNull()) {
@@ -1188,7 +1197,7 @@ void Core::registerFunctions(Game& game)
 
   Core::loadModule(":/system/modules.js");
   js_pop(internal::J,2); //restore stack after call js-function
-  Logger::warning( "STACK state {}", js_gettop(internal::J));
+  Logger::debug( "STACK state {}", js_gettop(internal::J));
   internal::DirectoryChangeObserver.watch( ":/system" );
   internal::DirectoryChangeObserver.onFileChange().connect( &engine_js_ReloadFile );
 }

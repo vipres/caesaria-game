@@ -66,6 +66,8 @@ public:
     append( object::group::unknown, "" );
     append( object::group::obtain, "rawmaterial" );
     append( object::group::engineering, "engineer" );
+    // objetos naturales (terreno, rocas, arboles, rios) de construction.model
+    append( object::group::natural, "natural" ); // terreno, rocas, arboles, rios
   }
 };
 

@@ -55,6 +55,7 @@ APPEND_NAMEDTYPE_ID(road,           20)
 APPEND_NAMEDTYPE_ID(entertainment,  21)
 APPEND_NAMEDTYPE_ID(house,          22)
 APPEND_NAMEDTYPE_ID(wall,           23)
+  APPEND_NAMEDTYPE_ID(natural, 24)
 END_NAMEDTYPE(ID)
 }
 

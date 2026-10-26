@@ -47,7 +47,7 @@
       }
 
       Athenae : {
-        nation : "greek"
+        nation : "graeci"
         sells : { pottery : 40, wine : 15, oil : 25 }
         buys : { wheat : 15, meat : 25 }
         land : true

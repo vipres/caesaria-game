@@ -58,7 +58,12 @@ void ResourceLoader::loadFromModel( Path path2model, const Directory dir )
     Logger::debug( "ResourceLoader: try mount archive " + absArchivePath );
 
     Directory absDir = absArchivePath.directory();
-    absArchivePath = absDir.find( absArchivePath.baseName(), Path::ignoreCase );       
+    absArchivePath = absDir.find( absArchivePath.baseName(), Path::ignoreCase );
+    if( absArchivePath.toString().empty() )
+    {
+      Logger::warning( "ResourceLoader: archive not found " + entry.second.toString() );
+      continue;
+    }
 
     ArchivePtr archive = FileSystem::instance().mountArchive( absArchivePath );
 
@@ -118,6 +123,10 @@ void ResourceLoader::loadFiles(ArchivePtr archive)
   basename.reserve( 256 );
   for( auto& entry : files )
   {
+    // solo imagenes: el archivo puede traer atlas e "info"
+    if( !entry.name.isMyExtension( ".png", false ) && !entry.name.isMyExtension( ".bmp", false ) )
+      continue;
+
     NFile file = archive->createAndOpenFile( entry.name );
     if( file.isOpen() )
     {

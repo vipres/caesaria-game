@@ -108,7 +108,7 @@ std::string Religion::defaultName() { return TEXT(Religion); }
 Religion::Religion( PlayerCityPtr city )
   : Srvc( city, Religion::defaultName() ), _d( new Impl )
 {
-  LOG.warn( "Initialized" );
+  LOG.info( "Initialized" );
 }
 
 void Religion::timeStep( const unsigned int time )

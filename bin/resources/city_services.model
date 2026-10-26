@@ -13,7 +13,6 @@
   Disorder : { enabled : true }
   requests : { enabled : true }
   Military : { enabled : true }
-  audio_player : { enabled : true }
   HealthCare : { enabled : true }
   Peace : { enabled : true }
   Sentiment : { enabled : true }

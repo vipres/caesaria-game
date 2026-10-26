@@ -1,6 +1,6 @@
 {
   terrain : {
-    class : "terrain"
+    class : "natural"
     image.ext : {
       type_1 : { size:1, rc : "land1a", start : 62, count : 1 }
     }
@@ -14,14 +14,14 @@
   }
 
    meadow : {
-    class : "terrain"
+    class : "natural"
     image.ext : {
       type_1 : { size:1, rc : "land1a", start : 1, count : 1 }
     }
   }
 
   tree : {
-    class : "tree"
+    class : "natural"
     image.ext : {
       type_1 : { size:1, rc : "land1a", start : 10, count : 7 }
       type_2 : { size:1, rc : "land1a", start : 33, count : 27 }
@@ -29,14 +29,14 @@
   }
 
   plateau : {
-    class : "rock"
+    class : "natural"
     image.ext : {
       type_1 : { size:1, rc : "plateau", start : 1, count : 44 }
     }
   }
 
   rock : {
-    class : "rock"
+    class : "natural"
     image.ext : {
       type_1 : { size:1, rc : "land1a", start : 290, count : 8 }
       type_1a : { size:1, rc : "land3a", start : 71, count : 8 }
@@ -190,7 +190,6 @@
     image : [ "entertainment", 102 ]
     image.ext : {
       type_1 : { size:1, rc : "entertainment", start : 102, count : 6 }
-      type_1a: { size:1, rc : "plaza", start : 3139, count : 6 }
       type_2 : { size:2, rc : "entertainment", start : 108, count : 2 }
     }
   },
@@ -988,5 +987,13 @@
       qty_200 : { qty : 200, image : [ "potteryst", 2 ], offset : [0,27] }
       qty_300 : { qty : 300, image : [ "potteryst", 3 ], offset : [0,27] }
     }
+  }
+
+  river : {
+    class : "natural"
+  }
+
+  waymark : {
+    class : "natural"
   }
 }

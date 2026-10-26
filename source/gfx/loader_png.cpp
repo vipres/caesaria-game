@@ -16,6 +16,12 @@ static void png_cpexcept_error(png_structp png_ptr, png_const_charp msg)
 // PNG function for warning handling
 static void png_cpexcept_warn(png_structp png_ptr, png_const_charp msg)
 {
+  if( std::string( msg ).find( "iCCP" ) != std::string::npos )
+  {
+    Logger::debug( "PNG warning {0}", msg ); // perfil de color incorrecto, inofensivo
+    return;
+  }
+
   Logger::warning( "PNG warning {0}", msg );
 }
 

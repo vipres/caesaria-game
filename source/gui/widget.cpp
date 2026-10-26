@@ -88,7 +88,8 @@ Widget::Widget( Widget* parent, int id, const Rect& rectangle )
   _d.isTabGroup = false;
   _d.environment = parent ? parent->ui() : 0;
 
-  Logger::warningIf( !parent, "Parent for widget is null" );
+  if( !parent ) // el widget raiz de la interfaz no tiene padre
+    Logger::debug( "Parent for widget is null" );
 
   _d.rect.relative = rectangle;
   _d.rect.absolute = rectangle;

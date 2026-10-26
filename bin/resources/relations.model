@@ -18,7 +18,7 @@
 
   nations :
   {
-    rome : {
+    roman : {
       enemy : [ "barbarian" ]
     }
   }

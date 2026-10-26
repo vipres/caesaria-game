@@ -43,7 +43,7 @@
     cities :
     {
       Athenae : {
-        nation : "greek"
+        nation : "graeci"
         land : true
         sea : true
         available : true

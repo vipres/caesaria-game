@@ -115,6 +115,9 @@ public:
 
     for( auto& item : stream )
     {
+      if( item.first == "all" ) // opcion global, no es una ciudad
+        continue;
+
       CityPtr city = find( item.first );
       if( city.isValid() )
       {
@@ -233,7 +236,7 @@ void Empire::_initializeObjects( vfs::Path filename )
   VariantMap objects = config::load( filename.toString() );
   if( objects.empty() )
   {
-    Logger::warning( "Empire: can't load objects model from " + filename.toString() );
+    Logger::info( "Empire: no objects in model " + filename.toString() );
     return;
   }
 

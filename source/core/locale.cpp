@@ -95,6 +95,19 @@ std::string Locale::current()
 void Locale::addTranslation(std::string filename)
 {
   vfs::Path realPath = filename + "." + _llocale.currentLanguage;
+  if( !(_llocale.directory/realPath).exist() && _llocale.currentLanguage != "en" )
+  {
+    // no hay traduccion de este fichero para el idioma actual: usar la inglesa
+    Logger::info( "Locale: no {} translation for {}, fallback to english", _llocale.currentLanguage, filename );
+    realPath = filename + ".en";
+  }
+
+  if( !(_llocale.directory/realPath).exist() )
+  {
+    Logger::info( "Locale: no translation file for {}", filename );
+    return;
+  }
+
   _llocale.loadTranslator( realPath );
 }
 

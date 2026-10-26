@@ -118,7 +118,7 @@ public:
 
 Pathfinder::Pathfinder() : _d( new Impl )
 {
-  LOG_PF.warn( "Initialize" );
+  LOG_PF.info( "Initialize" );
 
   _d->maxLoopCount = 4800;
   _d->verbose = 0;

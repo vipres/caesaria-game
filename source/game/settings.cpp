@@ -198,7 +198,7 @@ Settings::Settings() : _d( new Impl )
   _d->options[ minMonthWithFood    ] = 3;
   _d->options[ worklessCitizenAway ] = 30;
   _d->options[ emigrantSalaryKoeff ] = 5.f;
-  _d->options[ oldgfx              ] = 1;
+  _d->options[ oldgfx              ] = false; // sin recursos de Caesar III se usan los graficos del remake (.model)
   _d->options[ logoImageRc         ] = "logo";
   _d->options[ showTabletMenu      ] = false;
   _d->options[ debugMenu           ] = false;
@@ -335,6 +335,7 @@ void Settings::checkC3present()
     _d->options[ forbidenTile        ] = Variant(std::string( "org_land" ) );
     _d->options[ titleResource       ] = Variant(std::string( "title" ) );
     _d->options[ logoImageRc         ] = Variant(std::string( "c3title" ) );
+    _d->options[ logoArchive         ] = Variant(std::string( "/gfx/pics_wait.zip" ) );
     _d->options[ cellw ] = 30;
   }
   else
@@ -343,6 +344,7 @@ void Settings::checkC3present()
     _d->options[ forbidenTile        ] = Variant(std::string( "oc3_land" ) );
     _d->options[ titleResource       ] = Variant(std::string( "titlerm" ) );
     _d->options[ logoImageRc         ] = Variant(std::string( "logo" ) );
+    _d->options[ logoArchive         ] = Variant(std::string( "/gfx/pics.zip" ) );
     _d->options[ cellw ] = 60;
   }
 

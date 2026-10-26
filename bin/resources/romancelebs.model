@@ -3,7 +3,7 @@
   honor_of_janus: { month : 10, day : 1, name : "Honor of Janus" }
   carmentalia : { month : 10, day : 15, name : "Carmentalia" }
   sementivae : { month : 10, day : 24, name : "Sementivae" }
-  sementivae : { month : 10, day : 27, name : "Games of the Castors }
+  sementivae : { month : 10, day : 27, name : "Games of the Castors" }
   feb_calends : { month : 11, day : 1, name : "Kalends" }
   feb_natalis : { month : 11, day : 5, name : "Temple of Concordia" }
   faunus : { month : 11, day : 13, name : "Ides" }
@@ -46,6 +46,7 @@
   mai_qrfc: { month : 2, day : 24, name : "QRCF, following Tubilustrium as in March" }
   mai_qrfc: { month : 2, day : 25, name : "Anniversary of the Temple of Fortuna Primigenia" }
 
+/* Notas (texto libre, no se parsea):
 Iunius
 
 Scullard places the Taurian Games on June 25–26,[12] but other scholars doubt these ludi had a fixed date or recurred on a regular basis.[13]
@@ -159,4 +160,5 @@ December
     23: Larentalia; commemorations for the temples of Diana and Juno Regina in the Circus Flaminius, and for the Tempestates; Sigillaria, the last day of the Saturnalia, devoted to gift-giving
     25: Dies Natalis Solis Invicti ("Birthday of the Unconquered Sun"); Brumalia (both Imperial)
 
+*/
 }

@@ -62,7 +62,7 @@ Font FontCollection::getFont(const std::string& family, int size, bool italic, b
   auto it = _d->familyPaths.find(family);
   if (it != _d->familyPaths.end())
   {
-    Font font = _addFont(family,it->second,size,italic,bold,ColorList::black);
+    Font font = _addFont(name,it->second,size,italic,bold,ColorList::black);
     return font;
   }
 

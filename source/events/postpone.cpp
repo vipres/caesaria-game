@@ -237,6 +237,13 @@ void PostponeEvent::Impl::executeRequest( Game& game, const std::string& type, b
 
 void PostponeEvent::Impl::executeEvent( Game& game, const std::string& type, bool& r  )
 {
+  // puede ser un servicio de ciudad (executeCityService) y no un evento
+  if( !EFactory::canCreate( type ) )
+  {
+    r = false;
+    return;
+  }
+
   GameEventPtr e = EFactory::create( type );
   if( e.isValid() )
   {

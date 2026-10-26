@@ -89,7 +89,7 @@ public:
 PlayerCity::PlayerCity(world::EmpirePtr empire)
   :  City( empire ), _d( new Impl )
 {
-  LOG_CITY.warn("Start initialize");
+  LOG_CITY.info("Start initialize");
 
   setBorderInfo(roadEntry, TilePos(0, 0));
   setBorderInfo(roadExit,  TilePos(0, 0));

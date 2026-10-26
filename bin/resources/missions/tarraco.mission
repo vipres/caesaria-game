@@ -43,7 +43,7 @@
       }
 
       "Leptis Magna" : {
-        nation : "greek"
+        nation : "graeci"
         sea : true
         land : true
         available : true

@@ -131,6 +131,10 @@ void AnimationBank::Impl::loadCarts(vfs::Path model)
   VariantMap config = config::load( model );
   for( const auto& it : config )
   {
+    // carros especiales que no corresponden a ninguna mercancia
+    if( it.first == "none" || it.first == "immigrantScarb" || it.first == "circusCart" )
+      continue;
+
     good::Product gtype = good::Helper::type( it.first );
 
     if( gtype != good::none )

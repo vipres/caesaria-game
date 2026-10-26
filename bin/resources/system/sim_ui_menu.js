@@ -194,6 +194,9 @@ sim.ui.menu.funcs = [];
 sim.ui.menu.rightSide = engine.getOption("rightMenu");
 
 sim.ui.menu.changeBuildingOptions = function() {
+  if (!sim.ui.menu.extmenu || !sim.ui.menu.extmenu.buttons)
+    return;
+
   for (var i in sim.ui.menu.simConfig) {
     var config = sim.ui.menu.simConfig[i];
     var button = sim.ui.menu.extmenu.buttons[i];
@@ -222,7 +225,10 @@ sim.ui.menu.enableAlarm = function(enable) {
 
 sim.ui.menu.simConfig.disaster.func = function() { g_session.setOption( "nextAlarm", true ); }
 sim.ui.menu.simConfig.messages.func = function() { sim.ui.dialogs.scribesmessages.show(); }
-sim.ui.menu.enableUndo = function(enable) { sim.ui.menu.extmenu.buttons.undo.enabled = enable; }
+sim.ui.menu.enableUndo = function(enable) {
+  if (sim.ui.menu.extmenu && sim.ui.menu.extmenu.buttons && sim.ui.menu.extmenu.buttons.undo)
+    sim.ui.menu.extmenu.buttons.undo.enabled = enable;
+}
 
 sim.ui.menu.updateScribeStatus = function() {
   if(sim.ui.menu.extmenu.scribes) {

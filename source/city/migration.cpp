@@ -87,7 +87,7 @@ public:
 Migration::Migration( PlayerCityPtr city )
   : Srvc( city, defaultName() ), _d( new Impl )
 {  
-  LOG_MIGRATION.warn( "Initialize" );
+  LOG_MIGRATION.info( "Initialize" );
 
   VariantMap options = config::load( ":/migration.model" );
   VARIANT_LOAD_ANYDEF_D( _d, checkRange, DateTime::daysInWeek, options )

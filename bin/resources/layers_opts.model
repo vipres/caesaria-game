@@ -101,13 +101,13 @@
 
   health : {
     visibleObjects : [ "road", "plaza", "garden", "burned_ruins", "collapsed_ruins", "tree", "low_bridge",
-                       "high_bridge", "elevation", "rift", "tree", "burning_ruins", "waymark", "doctor",
+                       "high_bridge", "elevation", "rift", "tree", "burning_ruins", "waymark", "clinic",
                        "hospital", "barber", "baths", "roadBlock", "plague_ruins" ]
   }
 
   doctor : {
     visibleObjects : [ "road", "plaza", "garden", "burned_ruins", "collapsed_ruins", "tree", "low_bridge",
-                       "high_bridge", "elevation", "rift", "tree", "burning_ruins", "waymark", "doctor",
+                       "high_bridge", "elevation", "rift", "tree", "burning_ruins", "waymark", "clinic",
                        "roadBlock", "plague_ruins" ]
   }
 
@@ -131,7 +131,7 @@
 
   aborigen : {
     visibleObjects : [ "road", "plaza", "garden", "burned_ruins", "collapsed_ruins", "tree", "low_bridge",
-                       "high_bridge", "elevation", "rift", "tree", "burning_ruins", "nativeCenter", "nativeField",
+                       "high_bridge", "elevation", "rift", "tree", "burning_ruins", "native_center", "native_field",
                        "waymark", "roadBlock", "plague_ruins" ]
   }
 
@@ -146,7 +146,7 @@
 
   tax : {
     visibleObjects : [ "road", "plaza", "garden", "burned_ruins", "collapsed_ruins", "tree", "low_bridge",
-                       "high_bridge", "elevation", "rift", "tree", "burning_ruins", "seante", "forum", "waymark",
+                       "high_bridge", "elevation", "rift", "tree", "burning_ruins", "senate", "forum", "waymark",
                        "plague_ruins" ]
     column : { rc : "taxcolumn", foot : 124, body : 125,  }
   }

@@ -110,7 +110,7 @@ lobby.ui.showLogs = function () {
 
 lobby.ui.changePlayerName = function (force, continueCallback) {
     var playerName = engine.getOption("playerName");
-    if (playerName === null || playerName.length === 0)
+    if (!playerName || playerName.length === 0)
         playerName = "##new_governor##";
 
     if (playerName.length === 0 || force) {

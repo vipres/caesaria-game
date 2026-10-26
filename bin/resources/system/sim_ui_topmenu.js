@@ -67,7 +67,8 @@ sim.ui.topmenu.labels.init = function() {
   lbPopulation.name = "#population";
   lbPopulation.background = "paneling_00015";
   lbPopulation.font = "FONT_2_WHITE";
-  lbPopulation.icon = { rc:useIcon ? "population" : "none", index:1 }
+  if (useIcon)
+    lbPopulation.icon = { rc:"population", index:1 }
   lbPopulation.textAlign = { h:"center", v:"center" }
   lbPopulation.tooltip = _u("population_tooltip")
 

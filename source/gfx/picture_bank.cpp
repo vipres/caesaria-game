@@ -220,6 +220,9 @@ PictureBank::~PictureBank(){}
 
 Picture PictureBank::Impl::tryLoadPicture(const std::string& name)
 {
+  if( name.empty() ) // nombre vacio = "sin imagen", no es un error
+    return Picture::getInvalid();
+
   vfs::Path realPath( name );
 
   bool fileExist = false;

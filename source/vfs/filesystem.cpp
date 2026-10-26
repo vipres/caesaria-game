@@ -190,7 +190,7 @@ ArchivePtr FileSystem::mountArchive(  const Path& filename,
   archive = _d->changeArchivePassword(filename, password );
   if( archive.isValid() )
   {
-    Logger::warning( "Open archive " + filename.absolutePath().toString() );
+    Logger::debug( "Open archive " + filename.absolutePath().toString() );
     return archive;
   }
 

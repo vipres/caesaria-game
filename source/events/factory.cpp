@@ -41,6 +41,12 @@ GameEventPtr EFactory::create( const std::string& name )
   return GameEventPtr();
 }
 
+bool EFactory::canCreate( const std::string& name )
+{
+  EFactory& inst = instance();
+  return inst._d->creators.find( name ) != inst._d->creators.end();
+}
+
 EFactory& EFactory::instance()
 {
   static EFactory inst;

@@ -46,6 +46,7 @@ class EFactory
 {
 public:
   static GameEventPtr create( const std::string& name );
+  static bool canCreate( const std::string& name );
   static EFactory& instance();
   void addCreator( const std::string& name, GameEventCreatorPtr creator );
 

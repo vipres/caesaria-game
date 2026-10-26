@@ -164,7 +164,7 @@ void Dialogbox::draw(gfx::Engine& painter )
 
 void Dialogbox::setTitle(const std::string& title)
 {
-  INIT_WIDGET_FROM_UI( Label*, lbTitle )
+  Label* lbTitle = findChildA<Label*>( "lbTitle", true, this ); // opcional segun el .gui
   if( lbTitle )
       lbTitle->setText( title );
 }
@@ -232,8 +232,8 @@ void Dialogbox::setButtons(int buttons)
   }
 
   INIT_WIDGET_FROM_UI( PushButton*, btnActionNever )
-  INIT_WIDGET_FROM_UI( TexturedButton*, btnActionYes )
-  INIT_WIDGET_FROM_UI( TexturedButton*, btnActionNo )
+  TexturedButton* btnActionYes = findChildA<TexturedButton*>( "btnActionYes", true, this );
+  TexturedButton* btnActionNo = findChildA<TexturedButton*>( "btnActionNo", true, this );
   if( btnActionNever )
   {
     btnActionNever->setVisible( (buttons & btnNever) == btnNever );
