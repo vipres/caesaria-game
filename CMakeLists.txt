@@ -2,6 +2,12 @@ project(CaesarIA)
 
 cmake_minimum_required(VERSION 2.6)
 
+# Las dependencias incluidas usan C antiguo (prototipos vacios, punteros implicitos);
+# GCC >= 15 compila en C23 por defecto, asi que fijamos gnu11 para el codigo C.
+if(CMAKE_C_COMPILER_ID STREQUAL "GNU" OR CMAKE_C_COMPILER_ID STREQUAL "Clang")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu11")
+endif()
+
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules" ${CMAKE_MODULE_PATH})
 message("CMake module path is ${CMAKE_MODULE_PATH}")
 

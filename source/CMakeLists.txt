@@ -189,6 +189,7 @@ if(WIN32)
    target_link_libraries(${PROJECT_NAME} "opengl32")
    target_link_libraries(${PROJECT_NAME} "winmm")
    target_link_libraries(${PROJECT_NAME} "imagehlp")
+   target_link_libraries(${PROJECT_NAME} "dbghelp")
 
   #include steam libraries
   set(GAME_BINARY_FILENAME "caesaria")

@@ -518,12 +518,18 @@ void Tilemap::turnRight()
 
     mTilePos = ti.tile->epos() - TilePos( 0, pSize - 1 );
     mTile = _d->ate( mTilePos );
+    if( !mTile )
+    {
+      Logger::warning( "Tilemap::turn master tile out of map at [{},{}]", mTilePos.i(), mTilePos.j() );
+      continue;
+    }
     for( int i=0; i < pSize; i++ )
     {
       for( int j=0; j < pSize; j++ )
       {
         Tile* apTile = _d->ate( mTilePos + TilePos( i, j ) );
-        apTile->setMaster( mTile );
+        if( apTile )
+          apTile->setMaster( mTile );
       }
     }
 
@@ -576,12 +582,18 @@ void Tilemap::turnLeft()
 
     mTilePos = ti.tile->epos() - TilePos( pSize - 1, 0 );
     mTile = _d->ate( mTilePos );
+    if( !mTile )
+    {
+      Logger::warning( "Tilemap::turn master tile out of map at [{},{}]", mTilePos.i(), mTilePos.j() );
+      continue;
+    }
     for( int i=0; i < pSize; i++ )
     {
       for( int j=0; j < pSize; j++ )
       {
         Tile* apTile = _d->ate( mTilePos + TilePos( i, j ) );
-        apTile->setMaster( mTile );
+        if( apTile )
+          apTile->setMaster( mTile );
       }
     }
 
@@ -686,6 +698,8 @@ void Tilemap::Impl::saveMasterTiles(Tilemap::Impl::MasterTiles &mtiles)
             for( int j=0; j < pSize; j++ )
             {
               Tile* apTile = ate( ti.tile->epos() + TilePos( i, j ) );
+              if( !apTile )
+                continue;
               apTile->setMaster( 0 );
               apTile->setPicture( Picture::getInvalid() );
             }

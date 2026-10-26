@@ -41,7 +41,7 @@
 #  undef  HAVE_POLL_FINE
 #  define HAVE_POLL_FINE 1
 #  define poll(x,y,z) WSAPoll((x),(y),(z))
-#  if defined(_MSC_VER) && defined(POLLRDNORM)
+#  if (defined(_MSC_VER) || defined(__MINGW32__)) && defined(POLLRDNORM)
 #    undef  POLLPRI
 #    define POLLPRI POLLRDBAND
 #    define HAVE_STRUCT_POLLFD 1

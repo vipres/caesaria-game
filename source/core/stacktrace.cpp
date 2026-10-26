@@ -37,7 +37,7 @@
 
 #ifdef GAME_PLATFORM_WIN
 #include <windows.h>
-#include <imagehlp.h>
+#include <dbghelp.h>
 #endif
 
 namespace crashhandler
@@ -75,67 +75,61 @@ static const char *ExceptionName(DWORD exceptionCode)
   return "Unknown exception";
 }
 
-/** Print out a stacktrace. */
+/** Print out a stacktrace (x86 and x64) using the dbghelp StackWalk64 API. */
 static void Stacktrace(LPEXCEPTION_POINTERS e)
 {
-  /*PIMAGEHLP_SYMBOL pSym;
-  STACKFRAME sf;
-  HANDLE process, thread;
-  DWORD dwModBase, Disp;
-  BOOL more = FALSE;
-  int count = 0;
-  char modname[MAX_PATH];
-
-  pSym = (PIMAGEHLP_SYMBOL)GlobalAlloc(GMEM_FIXED, 16384);
-
+  CONTEXT ctx = *e->ContextRecord;
+  STACKFRAME64 sf;
   ZeroMemory(&sf, sizeof(sf));
-  sf.AddrPC.Offset = e->ContextRecord->Eip;
-  sf.AddrStack.Offset = e->ContextRecord->Esp;
-  sf.AddrFrame.Offset = e->ContextRecord->Ebp;
+
+  DWORD machine;
+#if defined(_M_X64) || defined(__x86_64__)
+  machine = IMAGE_FILE_MACHINE_AMD64;
+  sf.AddrPC.Offset = ctx.Rip;
+  sf.AddrStack.Offset = ctx.Rsp;
+  sf.AddrFrame.Offset = ctx.Rbp;
+#else
+  machine = IMAGE_FILE_MACHINE_I386;
+  sf.AddrPC.Offset = ctx.Eip;
+  sf.AddrStack.Offset = ctx.Esp;
+  sf.AddrFrame.Offset = ctx.Ebp;
+#endif
   sf.AddrPC.Mode = AddrModeFlat;
   sf.AddrStack.Mode = AddrModeFlat;
   sf.AddrFrame.Mode = AddrModeFlat;
 
-  process = GetCurrentProcess();
-  thread = GetCurrentThread();
+  HANDLE process = GetCurrentProcess();
+  HANDLE thread = GetCurrentThread();
 
-  while(1) {
-    more = StackWalk(
-      IMAGE_FILE_MACHINE_I386, // TODO: fix this for 64 bit windows?
-      process,
-      thread,
-      &sf,
-      e->ContextRecord,
-      NULL,
-      SymFunctionTableAccess,
-      SymGetModuleBase,
-      NULL
-    );
-    if(!more || sf.AddrFrame.Offset == 0) {
+  char symBuffer[sizeof(IMAGEHLP_SYMBOL64) + MAX_PATH];
+  IMAGEHLP_SYMBOL64* sym = reinterpret_cast<IMAGEHLP_SYMBOL64*>(symBuffer);
+
+  for (int count = 0; count < 64; ++count)
+  {
+    BOOL more = StackWalk64(machine, process, thread, &sf, &ctx, NULL,
+                            SymFunctionTableAccess64, SymGetModuleBase64, NULL);
+    if (!more || sf.AddrPC.Offset == 0)
       break;
-    }
 
-    dwModBase = SymGetModuleBase(process, sf.AddrPC.Offset);
+    DWORD64 modBase = SymGetModuleBase64(process, sf.AddrPC.Offset);
+    char modname[MAX_PATH] = "Unknown";
+    if (modBase)
+      GetModuleFileNameA(reinterpret_cast<HMODULE>(static_cast<uintptr_t>(modBase)), modname, MAX_PATH);
 
-    if(dwModBase) {
-      GetModuleFileName((HINSTANCE)dwModBase, modname, MAX_PATH);
-    } else {
-      strcpy(modname, "Unknown");
-    }
+    unsigned long long pc = static_cast<unsigned long long>(sf.AddrPC.Offset);
+    unsigned long long rva = modBase ? pc - static_cast<unsigned long long>(modBase) : 0ull;
 
-    pSym->SizeOfStruct = sizeof(IMAGEHLP_SYMBOL);
-    pSym->MaxNameLength = MAX_PATH;
+    ZeroMemory(symBuffer, sizeof(symBuffer));
+    sym->SizeOfStruct = sizeof(IMAGEHLP_SYMBOL64);
+    sym->MaxNameLength = MAX_PATH;
+    DWORD64 disp = 0;
 
-    if(SymGetSymFromAddr(process, sf.AddrPC.Offset, &Disp, pSym)) {
-      // This is the code path taken on VC if debugging syms are found.
-      Logger::warning("(%d) %s(%s+%#0x) [0x%08X]\n", count, modname, pSym->Name, Disp, sf.AddrPC.Offset);
-    } else {
-      // This is the code path taken on MinGW, and VC if no debugging syms are found.
-      Logger::warning("(%d) %s [0x%08X]\n", count, modname, sf.AddrPC.Offset);
-    }
-    ++count;
+    if (SymGetSymFromAddr64(process, sf.AddrPC.Offset, &disp, sym))
+      Logger::warning("({}) {} ({}+0x{:x}) [0x{:x}] rva=0x{:x}", count, modname, sym->Name,
+                      static_cast<unsigned long long>(disp), pc, rva);
+    else
+      Logger::warning("({}) {} [0x{:x}] rva=0x{:x}", count, modname, pc, rva);
   }
-  GlobalFree(pSym);*/
 }
 
 /** Callback for SymEnumerateModules */
@@ -158,16 +152,23 @@ static LONG CALLBACK ExceptionHandler(LPEXCEPTION_POINTERS e)
   SymInitialize(GetCurrentProcess(), ".", TRUE);
 
   // Record exception info.
-  Logger::warning("Exception: %s (0x%08x)\n", ExceptionName(e->ExceptionRecord->ExceptionCode), e->ExceptionRecord->ExceptionCode);
-  Logger::warning("Exception Address: 0x%08x\n", e->ExceptionRecord->ExceptionAddress);
+  Logger::warning("Exception: {} (0x{:08x})", ExceptionName(e->ExceptionRecord->ExceptionCode),
+                  static_cast<unsigned long>(e->ExceptionRecord->ExceptionCode));
+  Logger::warning("Exception Address: 0x{:x}",
+                  static_cast<unsigned long long>(reinterpret_cast<uintptr_t>(e->ExceptionRecord->ExceptionAddress)));
+  if (e->ExceptionRecord->ExceptionCode == EXCEPTION_ACCESS_VIOLATION && e->ExceptionRecord->NumberParameters >= 2)
+    Logger::warning("Access violation: {} address 0x{:x}",
+                    e->ExceptionRecord->ExceptionInformation[0] == 0 ? "reading" : "writing",
+                    static_cast<unsigned long long>(e->ExceptionRecord->ExceptionInformation[1]));
 
   // Record list of loaded DLLs.
   //Logger::warning("DLL information:\n");
   //SymEnumerateModules(GetCurrentProcess(), EnumModules, NULL);
 
   // Record stacktrace.
-  Logger::warning("Stacktrace:\n");
+  Logger::warning("Stacktrace:");
   Stacktrace(e);
+  Logger::warning("Stacktrace end");
 
   // Unintialize IMAGEHLP.DLL
   SymCleanup(GetCurrentProcess());

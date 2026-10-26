@@ -590,9 +590,9 @@ Entries FileSystem::getFileList()
     //! Windows version
     #if defined(GAME_PLATFORM_WIN)
       struct _finddata_t c_file;
-      long hFile;
+      intptr_t hFile; // _findfirst devuelve intptr_t: con long se trunca en Windows x64
 
-      if( (hFile = _findfirst( "*", &c_file )) != -1L )
+      if( (hFile = _findfirst( "*", &c_file )) != (intptr_t)-1 )
       {
         do
         {

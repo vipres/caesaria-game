@@ -69,14 +69,14 @@ public:
   bool operator>=(const Vector2<T>&other) const
   {
     return (_x>other._x || math::isEqual(_x, other._x)) ||
-            (math::isEqual(_x, other._x) && (_y>other.Y || math::isEqual(_y, other._y)));
+            (math::isEqual(_x, other._x) && (_y>other._y || math::isEqual(_y, other._y)));
   }
 
   //! sort in order X, Y. Difference must be above rounding tolerance.
   bool operator<(const Vector2<T>&other) const
   {
     return (_x<other._x && !math::isEqual(_x, other._x)) ||
-           (math::isEqual(_x, other.X) && _y<other.Y && !math::isEqual(_y, other._y));
+           (math::isEqual(_x, other._x) && _y<other._y && !math::isEqual(_y, other._y));
   }
 
   //! sort in order X, Y. Difference must be above rounding tolerance.
@@ -299,8 +299,8 @@ public:
     const float mul1 = 2.0f * d * inv;
     const float mul2 = d * d;
 
-    return Vector2<T> ( (T)(_x * mul0 + v2.X * mul1 + v3.X * mul2),
-                        (T)(_y * mul0 + v2.Y * mul1 + v3.Y * mul2));
+    return Vector2<T> ( (T)(_x * mul0 + v2._x * mul1 + v3._x * mul2),
+                        (T)(_y * mul0 + v2._y * mul1 + v3._y * mul2));
   }
 
   //! Sets this vector to the linearly interpolated vector between a and b.
