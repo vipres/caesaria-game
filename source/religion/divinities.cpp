@@ -212,6 +212,7 @@ void RomeDivinity::setName(const std::string & name) { _name = name;}
 RomeDivinity::RomeDivinity(Type type)
 {
   _dtype = type;
+  _service = Service::srvCount; // sin esto, save() escribía basura si nadie llamó a setService/load
   _relation.current = relation::neitralMood;
   _relation.target = relation::neitralMood;
   _blessingDone = 0;

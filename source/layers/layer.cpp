@@ -736,6 +736,9 @@ void Layer::_initialize()
   StringArray visibleObjectTypes = vm.get( "visibleObjects" ).toStringArray();
   for( const auto& it : visibleObjectTypes )
   {
+    if( it == "all" ) // layers_opts.model: sin filtro de tipos, no es un object::Type
+      continue;
+
     object::Type ovType = object::toType( it );
     if( ovType != object::unknown )
       _dfunc()->visible.objects.insert( ovType );

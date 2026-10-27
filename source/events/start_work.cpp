@@ -42,6 +42,14 @@ void StartWork::load(const VariantMap& stream)
   GameEvent::load( stream );
   _options = stream.get( "action" ).toMap();
   _noTroubles = stream.get( "no_troubles", false );
+
+  _bldTypes.clear();
+  for( const auto& item : stream.get( "building" ).toList() )
+  {
+    object::Type btype = object::toType( item.toString() );
+    if( btype != object::unknown )
+      _bldTypes.push_back( btype );
+  }
 }
 
 VariantMap StartWork::save() const
@@ -62,27 +70,29 @@ void StartWork::_exec(Game& game, unsigned int)
   {
     events::dispatch<PostponeEvent>( i.first, i.second.toMap() );
   }
+
+  _isDeleted = true; // un solo disparo: sin esto volvería a ejecutarse cada semana
 }
 
 bool StartWork::_mayExec(Game& game, unsigned int ) const
 {
   if( game::Date::isWeekChanged() )
   {
-    bool ret = false;
+    if( _bldTypes.empty() )
+      return false;
 
     for( auto& type : _bldTypes )
     {
       WorkingBuildingList bld = game.city()->statistic().objects.find<WorkingBuilding>( type );
 
-      ret = !bld.empty();
+      if( bld.empty() )
+        return false;
 
-      if( ret && _noTroubles )
-      {
-        ret &= bld.front()->troubleDesc().empty();
-      }
+      if( _noTroubles && !bld.front()->troubleDesc().empty() )
+        return false;
     }
 
-    return ret;
+    return true;
   }
 
   return false;

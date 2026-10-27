@@ -225,7 +225,7 @@
       fail : { favour : -10, appendMonth : 24 }
     }
 
-    emperor_request_11#city_request : {
+    emperor_request_11_2#city_request : {
       date : "108.02.01"
       reqtype : "good_request"
       month : 12
@@ -639,7 +639,7 @@
       }
     }
 
-    barbarian_invasion_15#enemy_attack : {
+    barbarian_invasion_15_2#enemy_attack : {
       date : "105.01.01"
       type : "enemy_attack"
       target : "random"
@@ -666,7 +666,7 @@
       }
     }
 
-    barbarian_invasion_15#enemy_attack : {
+    barbarian_invasion_15_3#enemy_attack : {
       date : "110.01.01"
       type : "enemy_attack"
       target : "random"

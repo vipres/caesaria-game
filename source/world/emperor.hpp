@@ -46,6 +46,7 @@ public:
 
   const Gift& lastGift(const std::string& cityname) const;
   DateTime lastGiftDate(const std::string& cityname) const;
+  VariantList getGifts(const std::string& cityname) const;
   const Relation& relation(const std::string& cityname) const;
 
   void timeStep(unsigned int time);

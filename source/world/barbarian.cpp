@@ -31,7 +31,10 @@ namespace world
 
 REGISTER_CLASS_IN_WORLDFACTORY(Barbarian)
 
-const Point Barbarian::startLocation = Point( 1500, 0 );
+// (1500,0) lies on the land mass north of the Rhine-Danube line of worldmap.model, which
+// only touches the Roman side at diagonal corners the route finder refuses: no land route
+// ever existed to any city. (1280,320) is the south bank of that river, cell (64,16).
+const Point Barbarian::startLocation = Point( 1280, 320 );
 
 class Barbarian::Impl
 {

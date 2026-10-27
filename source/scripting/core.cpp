@@ -285,6 +285,16 @@ void engine_js_push(js_State *J, const VariantMap& items)
   }
 }
 
+void engine_js_push(js_State *J, const VariantList& items)
+{
+  js_newarray(J);
+  uint32_t index = 0;
+  for (const auto& item : items) {
+    engine_js_push(J, item);
+    js_setindex(J, -2, index++);
+  }
+}
+
 void engine_js_push(js_State *J, const TilesArray& items)
 {
   js_newarray(J);
@@ -362,6 +372,14 @@ void engine_js_push(js_State* J,const Variant& param)
   case Variant::Char:
   case Variant::String:
     js_pushstring(J, param.toString().c_str());
+  break;
+
+  case Variant::List:
+    engine_js_push(J, param.toList());
+  break;
+
+  case Variant::Map:
+    engine_js_push(J, param.toMap());
   break;
 
   case Variant::Invalid:

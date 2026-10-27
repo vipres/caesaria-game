@@ -362,7 +362,7 @@
       fail : { favour : -8, appendMonth : 24 }
     }
 
-    fire_1#random_fire : {
+    fire_1_2#random_fire : {
       date : "71.09.01"
       strong : 8
       exec : {
@@ -516,7 +516,7 @@
       }
     }
 
-    barbarian_invasion_5#enemy_attack : {
+    barbarian_invasion_5_2#enemy_attack : {
       date : "68.08.01"
       type : "enemy_attack"
       target : "food"

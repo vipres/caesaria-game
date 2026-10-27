@@ -372,7 +372,7 @@
       }
     }
 
-    barbarian_invasion1#enemy_attack :
+    barbarian_invasion1_2#enemy_attack :
     {
       date : "-330.03.01"
       type : "enemy_attack"
@@ -406,7 +406,7 @@
       }
    }
 
-   barbarian_invasion1#enemy_attack :
+   barbarian_invasion1_3#enemy_attack :
    {
       date : "-325.07.01"
       type : "enemy_attack"

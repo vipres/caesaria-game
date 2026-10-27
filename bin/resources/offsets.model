@@ -5,7 +5,7 @@
   housng1d : { start : 1, stop : 45, offset : [-1,-1] }
   engineering : { start : 1, stop : 5, offset : [-1,-1] }
   prefecture : { start : 1, stop : 5, offset : [-1,-1] }
-  land1a : { start: 160, stop : 199, offset : [-1,-1] }
+  land1a_low : { rc : "land1a", start: 160, stop : 199, offset : [-1,-1] }
   meadow : { start: 1, stop : 1, offset : [-1,-1] }
   org_land : { start: 1, stop : 5, offset : [-1,-1] }
   land1a : { start: 1188, stop : 1198, offset : [-1,-1] }
@@ -72,6 +72,6 @@
   academy : { rc : "academy", start : 1, stop : 2, offset : [ -1, -1 ] }
   glschool : { rc : "glschool_a", start : 1, stop : 15, offset : [ -1, -1 ] }
   ground : { start : 1, stop : 4, offset : [ -1, -1 ] }
-  gatehouseNorth : { rc : "sprites", start : 224, stop : 1, offset : [ -1, -1 ] }
-  gatehouseWest : { rc : "sprites", start : 225, stop : 1, offset : [ -1, -1 ] }
+  gatehouseNorth : { rc : "sprites", start : 224, stop : 224, offset : [ -1, -1 ] }
+  gatehouseWest : { rc : "sprites", start : 225, stop : 225, offset : [ -1, -1 ] }
 }

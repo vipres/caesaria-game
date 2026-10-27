@@ -139,7 +139,10 @@ TraderouteFinder::TraderouteFinder(const EmpireMap& empiremap)
   : _d( new Impl )
 {
   _d->update( empiremap );
-  _d->maxLoopCount = 1200;
+  // Tope de expansiones del A*: antes 1200 fijo, insuficiente para rutas largas
+  // (el bárbaro de (1500,0) nunca encontraba camino). El área del mapa garantiza
+  // que una ruta existente siempre se encuentra.
+  _d->maxLoopCount = empiremap.size().width() * empiremap.size().height();
 }
 
 bool TraderouteFinder::findRoute(TilePos start, TilePos stop, Locations& way, int flags)

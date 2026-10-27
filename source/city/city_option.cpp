@@ -65,6 +65,8 @@ public:
     _O(ironInRocks)
     _O(svkBorderEnabled)
     _O(farmUseMeadows)
+    _O(houseAvoidPlague)
+    _O(constructorMode)
 #undef _O
   }
 };

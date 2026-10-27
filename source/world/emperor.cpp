@@ -26,6 +26,7 @@
 #include "empire.hpp"
 #include "game/gift.hpp"
 #include "core/variant_map.hpp"
+#include "core/variant_list.hpp"
 #include "city/states.hpp"
 #include "config.hpp"
 #include "core/logger.hpp"
@@ -97,6 +98,21 @@ const Gift& Emperor::lastGift(const std::string &cityname) const {
 DateTime Emperor::lastGiftDate(const std::string& cityname) const
 {
   return lastGift(cityname).date();
+}
+
+VariantList Emperor::getGifts(const std::string& cityname) const
+{
+  VariantList ret;
+  for( const Gift& gift : relation(cityname).gifts() )
+  {
+    VariantMap vm;
+    vm[ "date" ] = gift.date();
+    vm[ "value" ] = gift.value();
+    vm[ "name" ] = gift.name();
+    vm[ "sender" ] = gift.sender();
+    ret.push_back( vm );
+  }
+  return ret;
 }
 
 const Relation& Emperor::relation(const std::string &cityname) const {

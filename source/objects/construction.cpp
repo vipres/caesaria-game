@@ -94,8 +94,10 @@ void Construction::_checkDestroyState()
   {
     collapse();
   }
-  else if( state( pr::fire ) >= 100 )
+  else if( state( pr::fire ) >= 100 && info().mayBurn() )
   {
+    // Sin mayBurn, burn() no destruía nada pero las subclases (Forum::burn, House::burn)
+    // ejecutaban sus efectos cada vez: el foro vaciaba la caja y la casa perdía habitantes.
     burn();
   }
 }

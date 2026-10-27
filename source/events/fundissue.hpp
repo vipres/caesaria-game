@@ -28,8 +28,9 @@ class Payment : public GameEvent
 {
 public:
   static GameEventPtr create( int type, int value );
-  static GameEventPtr import( good::Product good, int qty, float buff=1.f );
-  static GameEventPtr exportg( good::Product good, int qty, float buff=1.f );
+  // buff es una bonificación relativa (precio × (1 + buff)); con 1.f por defecto todo pago se duplicaba.
+  static GameEventPtr import( good::Product good, int qty, float buff=0.f );
+  static GameEventPtr exportg( good::Product good, int qty, float buff=0.f );
 
 protected:
   virtual void _exec( Game& game, unsigned int );

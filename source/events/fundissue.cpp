@@ -63,7 +63,7 @@ GameEventPtr Payment::exportg(good::Product good, int qty, float buff)
 
 bool Payment::_mayExec(Game& game, unsigned int time) const {  return true; }
 
-Payment::Payment() : _type( 0 ), _value( 0 ), _buff( 1.f ), _gtype( good::none ), _qty( 0 )
+Payment::Payment() : _type( 0 ), _value( 0 ), _buff( 0.f ), _gtype( good::none ), _qty( 0 )
 {}
 
 void Payment::_exec(Game& game, unsigned int )

@@ -454,7 +454,7 @@
       fail : { favour : -10, appendMonth : 24 }
     }
 
-    emperor_request6#city_request : {
+    emperor_request6_2#city_request : {
       date : "-180.0.01"
       reqtype : "good_request"
       month : 24
@@ -463,7 +463,7 @@
       fail : { favour : -10, appendMonth : 24 }
     }
 
-    fire_1#random_fire : {
+    fire_1_2#random_fire : {
       date : "-215.09.01"
       strong : 8
       exec : {

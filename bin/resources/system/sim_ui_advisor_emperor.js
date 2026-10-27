@@ -80,7 +80,7 @@ sim.ui.advisors.emperor.updateRequests = function(w) {
 }
 
 sim.ui.advisors.emperor.showGiftsHistory = function() {
-  var gifts = g_empire.emperor.getGifts(g_city.name);
+  var gifts = g_session.emperor.getGifts(g_city.name());
   if (gifts.length==0) {
     g_ui.addInformationDialog( "Note", "You was not sent any gifts to emperor");
   } else {

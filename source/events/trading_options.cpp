@@ -47,7 +47,7 @@ void ChangeTradingOptions::_exec(Game& game, unsigned int)
   for( const auto& it : citiesVm )
   {
     world::CityPtr cityp = game.empire()->findCity( it.first );
-    if( cityp.isNull() )
+    if( cityp.isValid() )
     {
       unsigned int tradeDelayMnt = it.second.toMap().get( "delay_trade" );
       if( tradeDelayMnt > 0 )

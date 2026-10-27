@@ -30,6 +30,14 @@ Object.defineProperty(DateTime.prototype, "month", { get: function () { return t
 Object.defineProperty(DateTime.prototype, "day", { get: function () { return this.get(2); }});
 Object.defineProperty(DateTime.prototype, "age", { get: function () { return this.year > 0 ? "ad" : "bc"; }});
 
+// Construye un DateTime a partir del objeto {year, month, day} que el motor devuelve
+// para las fechas guardadas en un Variant (p. ej. g_session.emperor.getGifts).
+DateTime.parse = function (obj) {
+  var dt = new DateTime();
+  if (obj && obj.year !== undefined) dt.setDate(obj.year, obj.month, obj.day);
+  return dt;
+}
+
 Object.defineProperty(DateTime.prototype, "romanStr", {
     get: function () {
         return this.formatDate(false, true);

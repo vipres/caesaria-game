@@ -442,7 +442,7 @@
       }
     }
 
-    barbarian_invasion_5#enemy_attack : {
+    barbarian_invasion_5_2#enemy_attack : {
       date : "-154.06.01"
       type : "enemy_attack"
       target : "random"

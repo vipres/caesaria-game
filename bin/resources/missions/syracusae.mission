@@ -229,7 +229,7 @@
       fail : { favour : -10, appendMonth : 12 }
     }
 
-    oil_price_rising#trading_options :
+    oil_price_rising_2#trading_options :
     {
       date : "-267.04.01"
       goods :

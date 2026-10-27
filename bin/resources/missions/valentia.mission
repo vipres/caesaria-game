@@ -205,7 +205,7 @@
       fail : { favour : -10, appendMonth : 24 }
     }
 
-    emperor_request_5#city_request : {
+    emperor_request_5_2#city_request : {
       date : "-41.02.01"
       reqtype : "good_request"
       month : 12
