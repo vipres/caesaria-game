@@ -70,11 +70,16 @@ object::Type LoaderHelper::convImgId2ovrType( unsigned int imgId )
     case 0xb0f: case 0xb0b:  case 0xb0c:        ovType = object::native_hut;    break;
     case 0xbdf:                                 ovType = object::amphitheater; break;
     case 0xb8c:                                 ovType = object::academy;  break;
-    case 0xb17:  case 0xb56:                    ovType = object::fountain;    break;
+    case 0xb17:  case 0xb56:
+    case 0xb1f: /* segunda variante, Caesarea */ ovType = object::fountain;    break;
     case 0xbeb:                                 ovType = object::theater ;    break;
-    case 0xb11: case 0xb44: case 0xb45: case 0xb46: ovType = object::native_field;    break;
+    case 0xb11: case 0xb44: case 0xb45: case 0xb46:
+    case 0xb47: case 0xb48: /* estados 4-5, Damascus y Sarmizegetusa */
+                                                ovType = object::native_field;    break;
     case 0xb43: case 0xb53: case 0xb57:         ovType = object::olive_farm;    break;
-    case 0xb4e: case 0xb52:                     ovType = object::fig_farm;    break;
+    case 0xb4e: case 0xb52:
+    case 0xb4f: case 0xb50: case 0xb51: /* cultivo de higo, estados 1-3 */
+                                                ovType = object::fig_farm;    break;
     case 0xb38:                                 ovType = object::market;    break;
     case 0xb7c + 71:                            ovType = object::granary;    break;  //0xbc3 - (71 is id granary in original game)
     case 0xb2f:                                 ovType = object::reservoir;    break;
@@ -88,6 +93,8 @@ object::Type LoaderHelper::convImgId2ovrType( unsigned int imgId )
     case 0xc69:                                 ovType = object::fort_legionaries; break;
     case 0xae0 + 0:  case 0xae1: case 0xae2: case 0xae4: case 0xae5:
     case 0xaeb: case 0xae6:
+    // housng1a_00009/13/18/19 (imgId = 0xada + indice; 0xb07 = housng1a_00045, house.model)
+    case 0xae3: case 0xae7: case 0xaec: case 0xaed:
                                                 ovType = object::house;      break;
     case 0xc70:                                 ovType = object::clinic;      break;
     case 0xc53:                                 ovType = object::statue_small; break;
@@ -97,6 +104,9 @@ object::Type LoaderHelper::convImgId2ovrType( unsigned int imgId )
                                                 ovType = object::house;    break;
     case 0xc4c: case 0xc4d: case 0xc4e: case 0xc4f:
                                                 ovType = object::garden;    break;
+    // plaza: 0xc44..0xc4b = entertainment 102..109 (construction.model); llevan tlRoad,
+    // asi que decodeTerrain las sigue creando como road
+    case 0xc44: case 0xc45: case 0xc46:         ovType = object::plaza;    break;
 
     case 0x29c: case 0x29d: case 0x2a1:         ovType = object::aqueduct; break;
     case 0xc5d: case 0xc52:                     ovType = object::prefecture; break;

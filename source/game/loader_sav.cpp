@@ -343,7 +343,9 @@ bool C3Sav::Impl::loadCity( std::fstream& f, Game& game )
 
         object::Type ovType = LoaderHelper::convImgId2ovrType(imgId);
         if (ovType == object::unknown) {
-          Logger::error("GameLoaderC3Sav: Unknown building {} at [{},{}]", imgId, i, j);
+          // 201..870 es terreno (plateau, land1a, land2a, land3a; imgid::toResource): no es un edificio
+          if (imgId > 870)
+            Logger::error("GameLoaderC3Sav: Unknown building {} at [{},{}]", imgId, i, j);
           Picture pic = imgid::toPicture(imgId);
 
           if (!pic.isValid())
